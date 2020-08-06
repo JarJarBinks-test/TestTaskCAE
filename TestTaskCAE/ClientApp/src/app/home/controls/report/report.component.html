@@ -1,0 +1,8 @@
+<div class="app-report">
+    <h2 i18n>Report</h2>
+    <app-filter (updateData)="initRefreshData($event[0], $event[1], $event[2], $event[3])" 
+        [isZoomed]="isZoomed" (resetZoom)="resetZoom()"></app-filter>
+
+    <highcharts-chart #chart *ngIf="chartOptions != null" [Highcharts]="Highcharts" [options]="chartOptions"        
+        style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+</div>

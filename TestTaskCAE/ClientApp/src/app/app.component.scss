@@ -1,0 +1,12 @@
+//@use './base.styles.scss' as bst;
+@import './base.styles.scss';
+
+.app-links {
+  margin: 0px auto;
+  width: $base-maxwidth;
+
+  button {
+    padding: 4px 10px;
+    margin-right: 10px;
+  }
+}

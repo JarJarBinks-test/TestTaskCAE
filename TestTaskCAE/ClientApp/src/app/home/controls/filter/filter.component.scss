@@ -1,0 +1,29 @@
+@import '../../../base.styles.scss';
+
+$size: 100px;
+
+.app-filter {
+  padding: 5px 10px;
+
+  > span,
+  > button,
+  > select,
+  > input {
+    color: $base-text-color
+  }
+
+  > span {
+    margin: 0px 2px 0px 0px;
+  }
+
+  > button,
+  > select,
+  > input {
+    margin: 0px 15px 0px 2px;
+  }
+
+  .error {
+    border-left: 2px solid $error-color;
+  }
+ // &:hover { font-size: 36px; }
+}

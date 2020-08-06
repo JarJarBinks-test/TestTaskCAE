@@ -1,0 +1,94 @@
+<div class="app-manage">
+  
+  <h2 i18n>New order</h2>
+  <div class="app-order-new">
+    <div>
+      <div class="text-wrapper"><span i18n>Date Created:</span></div>
+      <input type="date" [value]="newItemDateCreated | date:'yyyy-MM-dd'" 
+        (change)="newItemDateCreated = parseDateOrDefault($event.target.value , newItemDateCreated)" />
+    </div>
+    <div>
+      <div class="text-wrapper"><span i18n>Amount:</span></div>
+      <input [value]="newItemAmount" (keypress)="inputFloatOnly($event)" (keyup)="newItemAmount = $event.target.value" />
+    </div>
+    <div>
+      <button (click)="addItem(newItemAmount, newItemDateCreated)" [disabled]="!validateItem(newItemAmount, newItemDateCreated)">
+        <span i18n>Add</span>
+      </button>
+    </div>
+  </div>
+
+  <h2 i18n>Test data generate</h2>
+  <div class="app-order-new">
+    <div>
+      <div class="text-wrapper"><span i18n>From:</span></div>
+      <input type="date" [value]="from | date:'yyyy-MM-dd'" 
+        (change)="from = parseDateOrDefault($event.target.value , from)" />
+    </div>
+    <div>
+      <div class="text-wrapper"><span i18n>To:</span></div>
+      <input type="date" [value]="to | date:'yyyy-MM-dd'" 
+        (change)="to = parseDateOrDefault($event.target.value , to)" />
+    </div>
+    <div>
+      <div class="text-wrapper"><span i18n>Max Amount:</span></div>
+      <input [value]="maxAmount" (keypress)="inputFloatOnly($event)" (keyup)="maxAmount = $event.target.value" />
+    </div>
+    <div>
+      <div class="text-wrapper"><span i18n>Max Order in day:</span></div>
+      <input [value]="maxQty" (keypress)="inputIntOnly($event)" (keyup)="maxQty = $event.target.value" />
+    </div>
+    <div>
+      <button (click)="generateTestItems(from, to, maxAmount, maxQty)" [disabled]="!validateGenerate(from, to, maxAmount, maxQty)">
+        <span i18n>Generate</span>
+      </button>
+    </div>
+    <div class="data-progress" *ngIf="progress > 0">
+      <div class="progress-shadow" [style.width]="getProgress()"></div>
+    </div>
+  </div>
+
+  <h2 i18n>Manage orders</h2>
+  <app-filter [showOnlyDateFilter]="true" (updateData)="initRefreshData($event[0], $event[1], $event[2], $event[3])"></app-filter>
+  <div class="app-orders" *ngIf="orders.length > 0">
+    <div class="app-orders-header">
+      <div class="item-id">
+        <span i18n>Id</span>
+      </div>
+      <div class="item-amount">
+        <span i18n>Amount</span>
+      </div>
+      <div class="item-datecreated">
+        <span i18n>DateCreated</span>
+      </div>
+    </div>
+    <div #itm *ngFor="let o of orders; trackBy: orderItemTrackBy" (mouseover)="hightlight(itm, true)" (mouseout)="hightlight(itm, false)">
+      <div class="item-id">
+        <span i18n>{{ o.id }}</span>
+      </div>
+      <div class="item-amount">
+        <span *ngIf="!isEdit(o.id)" i18n>{{ o.amount | currency }}</span>
+        <input *ngIf="isEdit(o.id)" (keypress)="inputFloatOnly($event)" [(ngModel)]="o.amount" />
+      </div>
+      <div class="item-datecreated">
+        <span *ngIf="!isEdit(o.id)" i18n>{{ o.dateCreated | date: "yyyy-MM-dd" }}</span>
+        <input *ngIf="isEdit(o.id)" type="date" [value]="o.dateCreated | date:'yyyy-MM-dd'" 
+          (change)="o.dateCreated = parseDateOrDefault($event.target.value , o.dateCreated)" />
+      </div>
+      <div class="item-actions">
+        <button *ngIf="isEdit(o.id)" (click)="cancelEdit(); updateItem(o.id, o.amount, o.dateCreated)" [disabled]="!validateItem(o.amount, o.dateCreated)">
+          <span i18n>Update</span>
+        </button>
+        <button *ngIf="isEdit(o.id)" (click)="cancelEdit();">
+          <span i18n>Cancel</span>
+        </button>
+        <button *ngIf="!isEdit(o.id)" (click)="editId = o.id">
+          <span i18n>Edit</span>
+        </button>
+        <button (click)="deleteItem(o.id)">
+          <span i18n>Delete</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

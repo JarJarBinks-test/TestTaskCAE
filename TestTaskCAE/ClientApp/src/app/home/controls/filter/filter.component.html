@@ -1,0 +1,14 @@
+<div class="app-filter">
+  <span *ngIf="!showOnlyDateFilter" i18n>Time Period:</span>
+  <select *ngIf="!showOnlyDateFilter" [(ngModel)]="timePeriod" (change)="refreshData(true)" class="filter-period">
+    <option *ngFor="let tp of timePeriods" [value]="tp">{{tp}}</option>
+  </select>
+
+  <span i18n>Start Date:</span>
+  <input type="date" [value]="startDate | date:'yyyy-MM-dd'" (change)="timePeriodOnChange($event.target.value, 0)" />
+
+  <span i18n>End Date:</span>
+  <input type="date" [value]="endDate| date:'yyyy-MM-dd'" (change)="timePeriodOnChange($event.target.value, 1)" />
+
+  <button *ngIf="!showOnlyDateFilter && isZoomed" (click)="reset()" [disabled]="!isZoomed" ><span i18n>Reset Zoom</span></button>
+</div>

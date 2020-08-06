@@ -1,0 +1,85 @@
+@import '../../../base.styles.scss';
+
+.app-manage {
+  width: $base-maxwidth;
+  margin: 10px auto;
+
+  .app-orders {
+    margin: 10px 0px;
+
+    &>div {
+      padding: 5px 5px;
+      display: inline-block;
+      width: 100%;
+
+      .item-id {        
+        width: 5%;
+        float: left;
+        
+        span {
+          padding: 3px 3px;
+        }
+      }
+      .item-amount {
+        width: 15%;
+        float: left;
+      }
+      .item-datecreated {
+        width: 15%;
+        float: left;
+      }
+      .item-actions {
+        float: right;
+
+        button {
+          margin-right: 10px;
+        }
+      }
+
+      &.app-orders-header {
+        background-color: lightgray;
+      }
+    }
+  }
+
+  .app-orders,
+  .app-order-new {
+    margin-bottom: 40px;
+  }
+  
+  .app-order-new {
+    padding: 5px 10px;
+
+    > span {
+      margin: 0px 2px 0px 0px;
+    }
+  
+    > button,
+    > select,
+    > input {
+      margin: 0px 15px 0px 2px;
+    }
+
+    > div {
+      margin: 3px 0px;
+    }
+  }
+  
+}
+
+.data-progress {
+  display: inline-block;
+  width: 100%;
+  background-color: white;
+  border: 1px solid $base-text-color;
+  box-sizing: border-box;
+  height: 40px;
+
+  .progress-shadow {
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: $base-header-color;
+    height: 100%;
+  }
+}
+

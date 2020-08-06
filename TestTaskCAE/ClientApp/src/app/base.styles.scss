@@ -1,0 +1,35 @@
+$base-text-color: black;
+$base-header-color: #a0c338;
+$base-maxwidth: 1024px;
+$base-input-with: 130px;
+
+$error-color: #c6538c;
+
+.alert {
+  border: 1px solid $error-color;
+}
+
+h1,
+h2 {
+  text-align: center;
+  color: $base-header-color;
+}
+
+input {
+  padding: 5px 5px 4px 5px;
+  width: $base-input-with;
+
+  &[type='date'] {
+    padding: 2px 5px;
+  }
+}
+
+button {
+  padding: 4px 10px;
+  margin-right: 10px;
+}
+
+.text-wrapper {
+  float:left;
+  width: 12%;
+}
